@@ -1,39 +1,43 @@
-import java.util.*;
-public class Shuzigame {
+import java.util.Scanner;
+public class Shuzigame{
 
 	public static void main(String[] args) {
-		String a1="begin";
-		String a2="shutdown";
-		String a3="continue";
-		int i=0;                   //Ã¿¹ıÒ»¹Ø²ÂÊı·¶Î§À©´óÒ»±¶£¬µÚÒ»¹ØÎª0-64
-		int min=10000;             //¼ÇÂ¼×îºó×îÉÙ²Â²â´ÎÊı
-		System.out.println("ÇëÊäÈëbegin¿ªÊ¼ÓÎÏ·:");
+		String BEGIN="begin";
+		String SHUTDOWN="shutdown";
+		String CONTINUE="continue";
+		int i=0;                   //æ¯è¿‡ä¸€å…³çŒœæ•°èŒƒå›´æ‰©å¤§ä¸€å€ï¼Œç¬¬ä¸€å…³ä¸º0-64
+		int min=10000;             //è®°å½•æœ€åæœ€å°‘çŒœæµ‹æ¬¡æ•°
+		int j=0;                   //è®°å½•æœ€å°‘çŒœæµ‹æ¬¡æ•°çš„å…³å¡
+		System.out.println("è¯·è¾“å…¥"+BEGIN+"å¼€å§‹æ¸¸æˆ:");
 		Scanner input=new Scanner(System.in);
 		String s=input.nextLine();
-		if(s.equals(a1))
+		if(BEGIN.equals(s))
 		do{
-			i++; //¹ØÊı+1
-			System.out.println("»¶Ó­À´µ½µÚ"+i+"¹Ø");
-			int c=0;  //¼ÇÂ¼Ã¿Ò»¸öÓÎÏ·½×¶ÎµÄ²Â²â´ÎÊı
-			int m=(int)(Math.random()*100000)%(64*i);  //²úÉúÃ¿¸öÓÎÏ·½×¶Î¶ÔÓ¦·¶Î§ÄÚµÄËæ»úÊı
+			i++; //å…³æ•°+1
+			System.out.println("æ¬¢è¿æ¥åˆ°ç¬¬"+i+"å…³,çŒœæ•°èŒƒå›´æ˜¯0-"+64*i);
+			int c=0;  //è®°å½•æ¯ä¸€ä¸ªæ¸¸æˆé˜¶æ®µçš„çŒœæµ‹æ¬¡æ•°
+			int m=(int)(Math.random()*100000)%(64*i+1);  //äº§ç”Ÿæ¯ä¸ªæ¸¸æˆé˜¶æ®µå¯¹åº”èŒƒå›´å†…çš„éšæœºæ•°
 			int n=input.nextInt();
 			c++;
 			while(n!=m) {
 				if(n>m) {
-					System.out.println("Äú²ÂµÄÊı´óÁË!");
+					System.out.println("æ‚¨çŒœçš„æ•°å¤§äº†!");
 				}
 				else {
-					System.out.println("Äú²ÂµÄÊıĞ¡ÁË!");
+					System.out.println("æ‚¨çŒœçš„æ•°å°äº†!");
 				}
-				n=input.nextInt();   //²ÂµÄ²»¶Ô£¬¼ÌĞø²Â£¬²Â²â´ÎÊı+1
+				n=input.nextInt();   //çŒœçš„ä¸å¯¹ï¼Œç»§ç»­çŒœï¼ŒçŒœæµ‹æ¬¡æ•°+1
 				c++;       
 			}
-			if(c<min)  min=c;
-			System.out.println("´ğ°¸ÕıÈ·!Äú±¾´Î¹²²Â²â"+c+"´Î!");
-			System.out.println("½øÈëÏÂÒ»¹ØÇëÊäÈëcontinue,½áÊøÓÎÏ·ÇëÊäÈëshutdown");
+			if(c<min)  {
+				min=c;
+				j=i;    //è®°å½•å½“å‰æœ€å°çŒœæµ‹æ¬¡æ•°åŠå¯¹åº”çš„å…³å¡
+			}        
+			System.out.println("ç­”æ¡ˆæ­£ç¡®!æ‚¨åœ¨æœ¬å…³çŒœæµ‹"+c+"æ¬¡!å½“å‰æœ€å°‘çŒœæµ‹æ¬¡æ•°ä¸º"+min+"(ç¬¬"+j+"å…³)");
+			System.out.println("è¿›å…¥ä¸‹ä¸€å…³è¯·è¾“å…¥"+CONTINUE+"ç»“æŸæ¸¸æˆè¯·è¾“å…¥"+SHUTDOWN);
 			input=new Scanner(System.in);
 			s=input.nextLine();
-		}while(!s.equals(a2));
-		System.out.println("Äú²ÂÊı×îÉÙÓÃÁË"+min+"´Î");
+		}while(!SHUTDOWN.equals(s));
+		System.out.println("æ¸¸æˆç»“æŸ!æ­å–œæ‚¨å…±é—¯è¿‡"+i+"å…³,çŒœæµ‹æ¬¡æ•°æœ€å°‘ä¸º"+min+"(ç¬¬"+j+"å…³)!");
 	}
 }
