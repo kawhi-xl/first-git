@@ -1,0 +1,6 @@
+这个工程总共有5个类。MyThread、Borrowbook、Returnbook、Book、TestThread,其中MyThread继承自Thread,Borrowbook和Returnbook都继承自MyThread类，TestTread是程序的主类。
+1、MyThread：继承自Thread,具有成员变量flag用于判断当前线程是否运行结束,还有一个Book类型的book变量,用于对book执行借还操作和实现线程的通信；初始化构造方法和返回flag成员变量的getFlag（）方法。
+2、Borrowbook继承自MyThread类，run（）方法中实现具体的借书操作和线程之间的通信。
+3、Returnbook继承自MyThread类，run（）方法中实现具体的还书操作和线程之间的通信。
+4、Book:有一个记录库存量的amount变量，还有实现具体借还操作的operation()方法。
+5、TestThread是程序的主类，初始化书本库存量为1，然后先生成了5个借书线程和5个还书线程，然后根据线程的执行情况确保程序不会被阻塞适当补充还书线程。
