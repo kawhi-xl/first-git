@@ -1,21 +1,21 @@
 
 public class Returnbook extends Thread{
 	private Book book;
-    Returnbook(String name,Book book){//»¹ÊéÏß³Ì¹¹Ôì·½·¨
+    Returnbook(String name,Book book){//è¿˜ä¹¦çº¿ç¨‹æ„é€ æ–¹æ³•
     	super(name);
     	this.book=book;
     }
     public void run() {
     		try {
-    		Thread.sleep((int)Math.random()*10000);//Ëæ»úµÄ×èÈûÒ»¶ÎÊ±¼ä£¬Ê¹Á½¸öÏß³Ì½»²æ½øĞĞ
+    		Thread.sleep((int)Math.random()*10000);//éšæœºçš„é˜»å¡ä¸€æ®µæ—¶é—´ï¼Œä½¿çº¿ç¨‹ä¹‹é—´äº¤å‰è¿›è¡Œ
     		if(book.getAmount()==3) {
-    			System.out.println("Êé±¾¿â´æÒÑÂú£¬ÎŞĞè»¹Êé,"+Thread.currentThread().getName()+"ÌáÇ°ÖÕÖ¹");
+    			System.out.println("ä¹¦æœ¬åº“å­˜å·²æ»¡ï¼Œæ— éœ€è¿˜ä¹¦,"+Thread.currentThread().getName()+"æå‰ç»ˆæ­¢");
     		}else {
-    		book.Return();//»¹Êé
-    		book.operation(1);//Ö´ĞĞ»¹Êé²Ù×÷
+    		book.Return();//è¿˜ä¹¦
+    		book.operation(1);//æ‰§è¡Œè¿˜ä¹¦æ“ä½œ
     		}
     		}catch(InterruptedException e) {
-    			e.printStackTrace();//ÖĞ¶ÏÒì³£
+    			e.printStackTrace();//ä¸­æ–­å¼‚å¸¸
     		}      	
     }
 }
