@@ -1,9 +1,9 @@
-�ù��̰��������࣬һ���Ƿ�����Server,һ���ǿͻ���Client��
-1��������Server:
-    ��������:(1)��public static String changeCalendar() 
-               ��ʱ���ʽ���и�ʽ������
-             (2)��������
-               ͨ���˿�1�ͱ����̵Ŀͻ��˽���ͨ�ţ����ӳɹ�֮��ֱ��¼�ͻ���IP�Ͷ�             �ںţ�Ȼ��������󴴽�Server.txt��Ȼ���ȡ�ӿͻ��˷������ı���Ϣ����             �ı���Ϣ������һ���ɱ��ַ�����string��,ÿ�μ�¼���Ի��з�������Ȼ����             ֮ͬǰ��¼��IP�Ͷ˿ں�һ��д��Server.txt���ļ�ĩβ��
-2���ͻ���Client:
-      ��������
-             �����Ϸ�����֮�󣬴ӿ���̨�����ı���Ϣ����end��Ϊ��������ı�־����ÿ         �μ�¼Ϊ��λ������������ı���Ϣ��
+该工程包含两个类，一个是服务器Server,一个是客户端Client。
+1、服务器Server:
+    两个方法:(1)、public static String changeCalendar() 
+               对时间格式进行格式化处理
+             (2)主方法：
+               通过端口1和本工程的客户端进行通信，连接成功之后分别记录客户端IP和端口号，然后根据需求创建Server.txt，然后获取从客户端发来的文本信息，将文本信息保存在一个可变字符串中string中,每次记录都以换行符隔开，然后连同之前记录的IP和端口号一起写到Server.txt的文件末尾。
+2、客户端Client:
+      主方法：
+             连接上服务器之后，从控制台输入文本信息，以end作为输入结束的标志，以每次记录为单位向服务器发送文本信息。
