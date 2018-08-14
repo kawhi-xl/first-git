@@ -5,45 +5,39 @@ import java.io.FileWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Calendar;
-public class Server {//·şÎñÆ÷¶Ë
-	public static String changeCalendar() {//¶ÔÊ±¼ä½øĞĞ¸ñÊ½»¯
+import java.text.SimpleDateFormat;
+public class Server {//æœåŠ¡å™¨ç«¯
+	public static String changeCalendar() {//å¯¹æ—¶é—´æ ¼å¼è¿›è¡Œæ ¼å¼åŒ–å¤„ç†
 		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH);
-		int day = cal.get(Calendar.DAY_OF_MONTH);
-		int hour = cal.get(Calendar.HOUR_OF_DAY);
-		int minute = cal.get(Calendar.MINUTE);
-		int second = cal.get(Calendar.SECOND);
-		return year+"-"+month+"-"+day+"."+hour+":"+minute+":"+second;
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd.HH:mm:ss");
+		return format.format(cal.getTime());
 	}
 	
 	public static void main(String[] args) {
 		try {
-			ServerSocket server = new ServerSocket(1);//¼àÌı¶Ë¿ÚºÅÎª1µÄ¿Í»§¶ËÇëÇó
-			System.out.println("·şÎñÆ÷ÒÑ¾­Æô¶¯");
+			ServerSocket server = new ServerSocket(1);//åœ¨1ç«¯å£ä¸Šç›‘å¬å®¢æˆ·ç«¯çš„è¿æ¥è¯·æ±‚
+			System.out.println("æœåŠ¡å™¨å·²ç»å¯åŠ¨");
 			while(true) {
-				Socket s = server.accept();//½ÓÊÜ¿Í»§¶ËÇëÇó
-				String clientIP=s.getInetAddress().toString();//¼ÇÂ¼Á¬ÉÏ·şÎñÆ÷µÄ¿Í»§¶ËIP
-				int clientPort=s.getLocalPort();//¼ÇÂ¼Á¬ÉÏ·şÎñÆ÷µÄ¿Í»§¶Ë¶Ë¿Ú
-				System.out.println("¿Í»§¶Ë(IP:"+clientIP+",¶Ë¿Ú:"+clientPort+")Á¬½ÓÉÏÁË·şÎñÆ÷");
+				Socket s = server.accept();//æ¥å—å®¢æˆ·ç«¯è¯·æ±‚
+				String clientIP=s.getInetAddress().toString();//è®°å½•è¿ä¸ŠæœåŠ¡å™¨çš„å®¢æˆ·ç«¯IP
+				int clientPort=s.getLocalPort();//è®°å½•è¿ä¸ŠæœåŠ¡å™¨çš„å®¢æˆ·ç«¯ç«¯å£
+				System.out.println("å®¢æˆ·ç«¯(IP:"+clientIP+",ç«¯å£:"+clientPort+")è¿æ¥ä¸Šäº†æœåŠ¡å™¨");
 				DataInputStream reader = new DataInputStream(s.getInputStream());
 				try {
-					FileWriter file = new FileWriter("Server.txt",true);//Èç¹ûÃ»ÓĞ,¾ÍĞÂ½¨Server.txt,Ã¿´Î¶¼ÊÇÏòÎÄ¼şÄ©Î²Ìí¼ÓÄÚÈİ
-					String END = "end";//ÍøÂçĞÅÏ¢Á÷½áÊøµÄ±êÖ¾
-					StringBuffer string = new StringBuffer();//string¼ÇÂ¼¿Í»§¶Ë·¢ËÍµÄÎÄ±¾ĞÅÏ¢
+					FileWriter file = new FileWriter("Server.txt",true);//å¦‚æœæ²¡æœ‰,å°±æ–°å»ºServer.txt,æ¯æ¬¡éƒ½æ˜¯å‘æ–‡ä»¶æœ«å°¾æ·»åŠ å†…å®¹
+					String END = "end";//ä¸å®¢æˆ·ç«¯é€šä¿¡ç»“æŸçš„æ ‡å¿—
+					StringBuffer string = new StringBuffer();//stringè®°å½•å®¢æˆ·ç«¯å‘é€çš„æ–‡æœ¬ä¿¡æ¯
 					while(true) {
-						String str = reader.readUTF();//ÓÃstr¼ÇÂ¼Ò»´Î¼ÇÂ¼
-						if(str.equals(END)) {//½áÊø±êÖ¾²»»á±»Ìí¼Óµ½stringÖĞ
+						String str = reader.readUTF();//ç”¨strè®°å½•ä¸€æ¬¡è®°å½•
+						if(END.equals(str)) {//ç»“æŸæ ‡å¿—(ä¸ä¼šè¢«æ·»åŠ åˆ°stringä¸­)
 							break;
 						}
-						string.append(str+"\r\n");//°ÑÃ¿´Î¼ÇÂ¼Ìí¼Óµ½stringÄ©Î²,»»ĞĞ·û¸ô¿ª
-					}//»ñÈ¡¿Í»§¶Ë·¢À´µÄÎÄ±¾ĞÅÏ¢£¬±£´æÔÚstringÖĞ,Ã¿¸ö¼ÇÂ¼Ö®¼äÓÃ»»ĞĞ·û¸ô¿ª
-					file.write("Ê±¼ä:"+changeCalendar()+",IP:"+clientIP+",¶Ë¿Ú:"+clientPort+",ĞÅÏ¢:"+"\r\n"+string);
-					reader.close();
+						string.append(str+"\r\n");//æŠŠæ¯æ¬¡è®°å½•æ·»åŠ åˆ°stringæœ«å°¾,æ¢è¡Œç¬¦éš”å¼€
+					}//è·å–å®¢æˆ·ç«¯å‘æ¥çš„æ–‡æœ¬ä¿¡æ¯ï¼Œä¿å­˜åœ¨stringä¸­,æ¯ä¸ªè®°å½•ä¹‹é—´ç”¨æ¢è¡Œç¬¦éš”å¼€
+					file.write("æ—¶é—´:"+changeCalendar()+",IP:"+clientIP+",ç«¯å£:"+clientPort+",ä¿¡æ¯:"+"\r\n"+string);
 					file.close();
-					s.close();
 				}catch(FileNotFoundException e) {
-					System.out.println("server.txt²»´æÔÚ!");
+					System.out.println("server.txtä¸å­˜åœ¨!");
 				}
 			}
 		}catch(Exception e) {
