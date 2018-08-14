@@ -2,24 +2,24 @@ package client;
 import java.io.DataOutputStream;
 import java.util.Scanner;
 import java.net.Socket;
-public class Client {//¿Í»§¶Ë
+public class Client {//å®¢æˆ·ç«¯
 	public static void main(String[] args) {
 		try {
-			Socket s = new Socket("localhost",1);//Í¨¹ı1¶Ë¿ÚÏò·şÎñÆ÷·¢³öÇëÇó
-			DataOutputStream dataOut = new DataOutputStream(s.getOutputStream());//»ñÈ¡ÍøÂçĞÅÏ¢Á÷¶ÔÏó
+			Socket s = new Socket("localhost",1);//é€šè¿‡1ç«¯å£å‘æœåŠ¡å™¨å‘å‡ºè¯·æ±‚
+			DataOutputStream dataOut = new DataOutputStream(s.getOutputStream());//è·å–ç½‘ç»œä¿¡æ¯æµå¯¹è±¡
 			Scanner input = new Scanner(System.in);
-			String END = "end";//¿ØÖÆÌ¨ÊäÈë½áÊøµÄ±êÖ¾
-			System.out.println("ÇëÊäÈëÏò·şÎñÆ÷·¢ËÍµÄÄÚÈİ,×îºóÒ»ĞĞÒÔ"+END+"±íÊ¾ÊäÈë½áÊø");
+			String END = "end";//æ§åˆ¶å°è¾“å…¥ç»“æŸçš„æ ‡å¿—
+			System.out.println("è¯·è¾“å…¥å‘æœåŠ¡å™¨å‘é€çš„å†…å®¹,æœ€åä¸€è¡Œä»¥"+END+"è¡¨ç¤ºè¾“å…¥ç»“æŸ");
 			while(true) {
-				String str = input.nextLine();//ÓÃstrÀ´¼ÇÂ¼µ±Ç°¿ØÖÆÌ¨ÊäÈëµÄÕâÒ»ĞĞĞÅÏ¢
-				dataOut.writeUTF(str);//½«str¼ÇÂ¼µÄĞÅÏ¢Ìí¼Óµ½ÍøÂçĞÅÏ¢Á÷ÖĞ
-				if(str.equals(END)) {//ÊäÈë½áÊø
+				String str = input.nextLine();//ç”¨stræ¥è®°å½•å½“å‰æ§åˆ¶å°è¾“å…¥çš„è¿™ä¸€è¡Œä¿¡æ¯
+				dataOut.writeUTF(str);//å°†strè®°å½•çš„ä¿¡æ¯æ·»åŠ åˆ°ç½‘ç»œä¿¡æ¯æµä¸­,ç»“æŸæ ‡å¿—ä¼šä¼ ç»™æœåŠ¡å™¨
+				if(END.equals(str)) {//è¾“å…¥ç»“æŸ
 					break;
 				}
 			}
-			input.close();//¹Ø±ÕÊäÈëÁ÷
-			dataOut.close();//¹Ø±ÕÍøÂçÊäÈëÁ÷
-			s.close();//¹Ø±ÕÌ×½Ó×Ö
+			input.close();//å…³é—­è¾“å…¥æµ
+			dataOut.close();//å…³é—­ç½‘ç»œè¾“å…¥æµ
+			s.close();//å…³é—­å¥—æ¥å­—
 		}catch(Exception e) {
 			e.printStackTrace();
 		}		
